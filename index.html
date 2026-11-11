@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Ritika Gupta | Angular Developer (2+ Years Experience)</title>
+  <meta
+    name="description"
+    content="Portfolio of Ritika Gupta, an Angular Developer with 2+ years of experience building scalable SPAs, travel ERPs, booking engines, and e-commerce platforms using Angular (14+), TypeScript, RxJS, NgRx, SCSS, ASP.NET Core, and Node.js."
+  />
+  <meta
+    name="keywords"
+    content="Ritika Gupta, Angular Developer, Frontend Developer, TypeScript, RxJS, NgRx, Angular Material, ASP.NET Core, Node.js, Portfolio, Noida"
+  />
+  <meta name="author" content="Ritika Gupta" />
+  <meta name="theme-color" content="#060b19" />
+
+  <!-- Open Graph / Recruiter Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ritika Gupta | Angular Developer (2+ Years Experience)" />
+  <meta
+    property="og:description"
+    content="Angular Developer specializing in scalable Single Page Applications, RxJS, NgRx, Reactive Forms, and full-stack integration with ASP.NET Core & Node.js."
+  />
+
+  <!-- Inline SVG Favicon (Zero external asset dependency) -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%232563eb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a1124'/%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Poppins,Arial,sans-serif' font-weight='700' font-size='26' fill='%23f8fafc'%3ERG%3C/text%3E%3C/svg%3E"
+  />
+
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Skip Link for Keyboard Accessibility -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Ambient Background Layers -->
+  <div class="bg-ambient" aria-hidden="true">
+    <div class="bg-aurora"></div>
+    <div class="bg-grid"></div>
+    <canvas class="bg-canvas" id="bgCanvas"></canvas>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="cursor-spotlight" id="cursorSpotlight"></div>
+  </div>
+
+  <!-- Interactive Desktop Cursor Follower -->
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- Sticky Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="brand" aria-label="Ritika Gupta Home">
+        <span class="brand-badge" aria-hidden="true">RG</span>
+        <span class="brand-text">
+          <strong>Ritika Gupta</strong>
+          <small>Angular Developer</small>
+        </span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-mobile-actions">
+          <a
+            href="assets/Ritika-Gupta-Resume.pdf"
+            download="Ritika-Gupta-Resume.pdf"
+            class="btn btn-primary btn-sm"
+          >
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Resume
+          </a>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <a
+          href="assets/Ritika-Gupta-Resume.pdf"
+          download="Ritika-Gupta-Resume.pdf"
+          class="btn btn-outline btn-sm nav-resume-btn"
+        >
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Resume
+        </a>
+
+        <button
+          class="hamburger"
+          id="hamburgerBtn"
+          type="button"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- 1. HERO / HOME SECTION -->
+    <section id="home" class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="status-pill">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Open to Angular Developer Roles · 2+ Years Experience</span>
+          </div>
+
+          <p class="hero-greeting">Hello, I'm</p>
+          <h1 class="hero-title">Ritika Gupta</h1>
+
+          <div class="hero-role-row">
+            <span class="hero-role-static">Angular Developer</span>
+            <span class="hero-role-divider" aria-hidden="true">|</span>
+            <span class="hero-role-dynamic" id="roleDynamic" aria-live="polite">
+              Angular (14+) · RxJS · NgRx
+            </span>
+          </div>
+
+          <p class="hero-description">
+            Angular Developer with <strong>2+ years of experience</strong> in developing scalable Single Page Applications (SPAs),
+            reusable components, and responsive web applications. Proficient in Angular, TypeScript, JavaScript, RxJS,
+            Node.js, and REST API integration, with working knowledge of C# and .NET. Experienced in developing travel
+            booking platforms and e-commerce applications, integrating APIs, implementing business workflows, and
+            building user-friendly web solutions.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-primary">
+              <span>View Projects</span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+
+            <a
+              href="assets/Ritika-Gupta-Resume.pdf"
+              download="Ritika-Gupta-Resume.pdf"
+              class="btn btn-secondary"
+            >
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Download Resume</span>
+            </a>
+
+            <a href="#contact" class="btn btn-ghost">Contact Me</a>
+          </div>
+
+          <div class="hero-socials" aria-label="Social and Coding Profiles">
+            <a
+              href="https://www.linkedin.com/in/ritika-gupta7777"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-chip"
+              aria-label="Ritika Gupta LinkedIn Profile"
+            >
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="https://github.com/Ritika277"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-chip"
+              aria-label="Ritika Gupta GitHub Profile"
+            >
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href="https://leetcode.com/u/iamgupta/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-chip"
+              aria-label="Ritika Gupta LeetCode Profile"
+            >
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+              <span>LeetCode</span>
+            </a>
+
+            <a
+              href="mailto:ritikagupta0827@gmail.com"
+              class="social-chip"
+              aria-label="Email Ritika Gupta"
+            >
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Portrait Column -->
+        <div class="hero-visual">
+          <div class="portrait-wrapper">
+            <div class="portrait-ring" aria-hidden="true"></div>
+            <div class="portrait-card" id="portraitCard">
+              <!-- Place your professional photo at image/profile.jpg -->
+              <img
+                id="heroProfileImg"
+                src="image/profile.jpg"
+                alt="Ritika Gupta - Angular Developer"
+                class="portrait-img"
+                width="380"
+                height="440"
+              />
+              <!-- Graceful vector monogram shown automatically if image/profile.jpg is not uploaded yet -->
+              <div class="portrait-fallback" id="portraitFallback" aria-hidden="true">
+                <div class="fallback-emblem">
+                  <span>RG</span>
+                </div>
+                <p class="fallback-name">Ritika Gupta</p>
+                <p class="fallback-role">Angular Developer</p>
+              </div>
+            </div>
+
+            <!-- Floating Highlight Badges -->
+            <div class="floating-badge badge-top">
+              <span class="floating-value">2+ Yrs</span>
+              <span class="floating-label">Angular Experience</span>
+            </div>
+
+            <div class="floating-badge badge-bottom">
+              <span class="floating-value">End-to-End<br />Web Development</span>
+              <span class="floating-label">Angular · DOT NET · REST API Integration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Career Profile</span>
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">
+            Frontend-focused Angular specialist with full-stack integration experience across enterprise travel platforms and e-commerce.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card card reveal">
+            <h3>Building High-Performance Angular Applications at Scale</h3>
+            <p>
+              I am an <strong>Angular Developer with 2+ years of hands-on experience</strong> designing and delivering
+              scalable Single Page Applications (SPAs), reusable component libraries, and responsive user interfaces
+              using <strong>Angular (14+), TypeScript, RxJS, NgRx, and SCSS</strong>.
+            </p>
+            <p>
+              Currently at <strong>GenX eSolutions</strong>, I contribute to <strong>Travzilla Pro</strong>, an enterprise Travel ERP
+              serving <strong>55+ global clients across 20+ countries</strong>, as well as the <strong>TravEngine</strong>
+              multi-service travel booking platform. My core strengths lie in building complex multi-step Reactive Forms
+              with custom validators, reactive asynchronous data streams with RxJS, centralized NgRx state management,
+              and optimizing data-heavy ERP screens.
+            </p>
+            <p>
+              Alongside deep frontend engineering, I bring practical full-stack experience integrating REST and XML APIs
+              with <strong>ASP.NET Core (C#)</strong> and <strong>Node.js</strong> backends, designing relational schemas in
+              <strong>SQL Server</strong> and <strong>MySQL</strong>, and collaborating in Agile Scrum teams using clean Git workflows.
+            </p>
+
+            <div class="about-meta-list">
+              <div class="about-meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">Noida, Uttar Pradesh, India</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="meta-label">Primary Stack</span>
+                <span class="meta-value">Angular (14+), TypeScript, RxJS, NgRx</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="meta-label">Backend Exposure</span>
+                <span class="meta-value">ASP.NET Core (C#), Node.js, REST APIs</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="meta-label">Education</span>
+                <span class="meta-value">B.Tech CSE · AKTU (CGPA 8.37)</span>
+              </div>
+            </div>
+
+            <div class="about-actions">
+              <a
+                href="assets/Ritika-Gupta-Resume.pdf"
+                download="Ritika-Gupta-Resume.pdf"
+                class="btn btn-primary"
+              >
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download Resume (PDF)
+              </a>
+              <a href="#experience" class="btn btn-outline">Explore Work History</a>
+            </div>
+          </div>
+
+          <div class="about-stats reveal">
+            <div class="stat-card card">
+              <div class="stat-number">2+</div>
+              <div class="stat-title">Years Experience</div>
+              <p class="stat-desc">Production SPA engineering across travel tech &amp; e-commerce</p>
+            </div>
+
+            <div class="stat-card card">
+              <div class="stat-number">55+</div>
+              <div class="stat-title">Global Clients</div>
+              <p class="stat-desc">Served via Travzilla Pro Travel ERP across 20+ countries</p>
+            </div>
+
+            <div class="stat-card card">
+              <div class="stat-number">3</div>
+              <div class="stat-title">Engineering Roles</div>
+              <p class="stat-desc">GenX eSolutions, Align Info Solutions &amp; Krati Tech</p>
+            </div>
+
+            <div class="stat-card card">
+              <div class="stat-number">8.37</div>
+              <div class="stat-title">B.Tech CSE CGPA</div>
+              <p class="stat-desc">Dr. A.P.J. Abdul Kalam Technical University (AKTU)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TECHNICAL SKILLS SECTION -->
+    <section id="skills" class="skills section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Core Competencies</span>
+          <h2 class="section-title">Technical Skills</h2>
+          <p class="section-subtitle">
+            Technologies, frameworks, databases, and engineering practices from my production experience.
+          </p>
+        </div>
+
+        <!-- Interactive Category Filter -->
+        <div class="skills-filter reveal" role="tablist" aria-label="Filter skills by category">
+          <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All Skills</button>
+          <button type="button" class="filter-btn" data-filter="frontend" aria-pressed="false">Frontend</button>
+          <button type="button" class="filter-btn" data-filter="backend" aria-pressed="false">Backend &amp; APIs</button>
+          <button type="button" class="filter-btn" data-filter="databases" aria-pressed="false">Databases</button>
+          <button type="button" class="filter-btn" data-filter="tools" aria-pressed="false">Tools &amp; AI</button>
+          <button type="button" class="filter-btn" data-filter="concepts" aria-pressed="false">Architecture</button>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Frontend -->
+          <article class="skill-card card reveal" data-category="frontend">
+            <div class="skill-card-header">
+              <span class="skill-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                  <polyline points="2 17 12 22 22 17" />
+                  <polyline points="2 12 12 17 22 12" />
+                </svg>
+              </span>
+              <div>
+                <h3>Frontend Engineering</h3>
+                <p>SPA architecture &amp; reactive UI</p>
+              </div>
+            </div>
+            <div class="badge-list">
+              <span class="skill-badge badge-primary">Angular (14+)</span>
+              <span class="skill-badge badge-primary">TypeScript</span>
+              <span class="skill-badge badge-primary">RxJS</span>
+              <span class="skill-badge badge-primary">NgRx</span>
+              <span class="skill-badge">JavaScript (ES6+)</span>
+              <span class="skill-badge">Angular Material</span>
+              <span class="skill-badge">Reactive Forms</span>
+              <span class="skill-badge">HTML5</span>
+              <span class="skill-badge">CSS3</span>
+              <span class="skill-badge">SCSS</span>
+              <span class="skill-badge">Responsive Design</span>
+            </div>
+          </article>
+
+          <!-- Backend & APIs -->
+          <article class="skill-card card reveal" data-category="backend">
+            <div class="skill-card-header">
+              <span class="skill-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="7" rx="2" />
+                  <rect x="2" y="14" width="20" height="7" rx="2" />
+                  <line x1="6" y1="6.5" x2="6.01" y2="6.5" />
+                  <line x1="6" y1="17.5" x2="6.01" y2="17.5" />
+                </svg>
+              </span>
+              <div>
+                <h3>Backend &amp; API Integration</h3>
+                <p>Service layers &amp; secure auth</p>
+              </div>
+            </div>
+            <div class="badge-list">
+              <span class="skill-badge badge-primary">ASP.NET Core</span>
+              <span class="skill-badge badge-primary">C#</span>
+              <span class="skill-badge badge-primary">Node.js</span>
+              <span class="skill-badge">RESTful APIs</span>
+              <span class="skill-badge">XML APIs</span>
+              <span class="skill-badge">JWT Authentication</span>
+            </div>
+          </article>
+
+          <!-- Databases -->
+          <article class="skill-card card reveal" data-category="databases">
+            <div class="skill-card-header">
+              <span class="skill-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                </svg>
+              </span>
+              <div>
+                <h3>Databases &amp; Data Modeling</h3>
+                <p>Schema design &amp; query tuning</p>
+              </div>
+            </div>
+            <div class="badge-list">
+              <span class="skill-badge badge-primary">SQL Server</span>
+              <span class="skill-badge badge-primary">MySQL</span>
+              <span class="skill-badge">MongoDB</span>
+              <span class="skill-badge">SQL Query Optimization</span>
+              <span class="skill-badge">Database Schema Design</span>
+            </div>
+          </article>
+
+          <!-- Tools & Version Control -->
+          <article class="skill-card card reveal" data-category="tools">
+            <div class="skill-card-header">
+              <span class="skill-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                </svg>
+              </span>
+              <div>
+                <h3>Tools, CLI &amp; AI Workflow</h3>
+                <p>Version control &amp; API testing</p>
+              </div>
+            </div>
+            <div class="badge-list">
+              <span class="skill-badge">Git</span>
+              <span class="skill-badge">GitHub</span>
+              <span class="skill-badge">GitLab</span>
+              <span class="skill-badge">Postman</span>
+              <span class="skill-badge">Angular CLI</span>
+              <span class="skill-badge">VS Code</span>
+              <span class="skill-badge">Visual Studio</span>
+              <span class="skill-badge">npm</span>
+              <span class="skill-badge">GitHub Copilot</span>
+              <span class="skill-badge">Cursor AI</span>
+              <span class="skill-badge">ChatGPT</span>
+              <span class="skill-badge">Claude</span>
+            </div>
+          </article>
+
+          <!-- Architecture & Concepts -->
+          <article class="skill-card card skill-card-wide reveal" data-category="concepts">
+            <div class="skill-card-header">
+              <span class="skill-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3" />
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+              </span>
+              <div>
+                <h3>Architecture &amp; Engineering Concepts</h3>
+                <p>Clean code, state patterns &amp; delivery workflows</p>
+              </div>
+            </div>
+            <div class="badge-list">
+              <span class="skill-badge">OOP</span>
+              <span class="skill-badge">Dependency Injection</span>
+              <span class="skill-badge">Reactive Programming</span>
+              <span class="skill-badge">State Management</span>
+              <span class="skill-badge">REST API Design</span>
+              <span class="skill-badge">Lazy Loading &amp; Route Guards</span>
+              <span class="skill-badge">HTTP Interceptors</span>
+              <span class="skill-badge">Cross-Browser Compatibility</span>
+              <span class="skill-badge">Performance Optimization</span>
+              <span class="skill-badge">Agile / Scrum</span>
+              <span class="skill-badge">Payment Gateway Integration</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. EXPERIENCE SECTION -->
+    <section id="experience" class="experience section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Career Journey</span>
+          <h2 class="section-title">Professional Experience</h2>
+          <p class="section-subtitle">
+            2+ years delivering production Angular applications, travel ERP systems, and full-stack REST integrations.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <!-- Role 1: GenX eSolutions -->
+          <article class="timeline-item reveal">
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-card card">
+              <div class="timeline-header">
+                <div>
+                  <span class="role-status-badge">Current Role</span>
+                  <h3 class="timeline-role">Software Engineer (Full Stack – Angular / .NET Core)</h3>
+                  <p class="timeline-company">GenX eSolutions · Noida, Uttar Pradesh, India</p>
+                </div>
+                <span class="timeline-date">May 2026 – Present</span>
+              </div>
+
+              <ul class="timeline-bullets">
+                <li>
+                  Developed and maintained responsive <strong>Angular (14+) Single Page Applications</strong> and reusable UI
+                  components with TypeScript and SCSS for <strong>Travzilla Pro</strong>, a Travel ERP serving
+                  <strong>55+ clients across 20+ countries</strong>, delivering a consistent UI across browsers and devices.
+                </li>
+                <li>
+                  Built dynamic search, filtering, and booking workflows using <strong>RxJS</strong> (Observables, Subjects, operators)
+                  and <strong>NgRx</strong> to manage asynchronous data streams and application state.
+                </li>
+                <li>
+                  Implemented multi-step booking forms with <strong>Angular Reactive Forms</strong>, custom validators, and
+                  real-time error handling to improve data accuracy and user experience.
+                </li>
+                <li>
+                  Integrated <strong>REST and XML APIs</strong> with <strong>ASP.NET Core (C#)</strong> backend services and
+                  optimized frontend performance for data-heavy ERP screens.
+                </li>
+              </ul>
+
+              <div class="tag-row">
+                <span class="tech-tag">Angular 14+</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">RxJS</span>
+                <span class="tech-tag">NgRx</span>
+                <span class="tech-tag">Reactive Forms</span>
+                <span class="tech-tag">SCSS</span>
+                <span class="tech-tag">ASP.NET Core (C#)</span>
+                <span class="tech-tag">REST &amp; XML APIs</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Role 2: Align Info Solutions -->
+          <article class="timeline-item reveal">
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-card card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Software Developer Executive</h3>
+                  <p class="timeline-company">Align Info Solutions Pvt Ltd · Noida, Uttar Pradesh, India</p>
+                </div>
+                <span class="timeline-date">Oct 2025 – Feb 2026</span>
+              </div>
+
+              <ul class="timeline-bullets">
+                <li>
+                  Designed and developed responsive, mobile-first web applications using <strong>Angular, JavaScript (ES6+),
+                  HTML5, and CSS3</strong>, collaborating with cross-functional teams in an Agile environment to deliver
+                  functional and visual requirements.
+                </li>
+                <li>
+                  Developed <strong>REST API integrations</strong> using <strong>Node.js</strong> and managed database connectivity,
+                  optimizing relational SQL queries to improve data retrieval speed and application performance across devices.
+                </li>
+              </ul>
+
+              <div class="tag-row">
+                <span class="tech-tag">Angular</span>
+                <span class="tech-tag">JavaScript (ES6+)</span>
+                <span class="tech-tag">HTML5 &amp; CSS3</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">REST APIs</span>
+                <span class="tech-tag">SQL Optimization</span>
+                <span class="tech-tag">Agile</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Role 3: Krati Tech -->
+          <article class="timeline-item reveal">
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-card card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">Web Developer</h3>
+                  <p class="timeline-company">Krati Tech Pvt Ltd · Noida, Uttar Pradesh, India</p>
+                </div>
+                <span class="timeline-date">Jun 2024 – Sep 2025</span>
+              </div>
+
+              <ul class="timeline-bullets">
+                <li>
+                  Developed and maintained responsive web applications using <strong>Angular, TypeScript, HTML5, and CSS3</strong>,
+                  ensuring cross-browser compatibility and intuitive UI workflows.
+                </li>
+                <li>
+                  Designed secure <strong>MySQL database schemas</strong> and integrated <strong>RESTful APIs with Node.js</strong>
+                  backends for reliable user data storage and smooth client–server communication.
+                </li>
+              </ul>
+
+              <div class="tag-row">
+                <span class="tech-tag">Angular</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">HTML5 &amp; CSS3</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">RESTful APIs</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PROJECTS SECTION -->
+    <section id="projects" class="projects section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Live Production Work</span>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">
+            Production platforms built with Angular, reactive state patterns, and real-world API &amp; payment integrations.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: TravEngine -->
+          <article class="project-card card reveal">
+            <div class="project-preview project-preview-travel">
+              <div class="preview-topbar" aria-hidden="true">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="preview-url">alb-ui.travengine.com</span>
+              </div>
+              <div class="preview-body">
+                <span class="project-pill">Multi-Service Travel Booking</span>
+                <div class="preview-modules" aria-hidden="true">
+                  <span>Hotels</span>
+                  <span>Transport</span>
+                  <span>Activities</span>
+                  <span>Tours</span>
+                  <span>Packages</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-title-row">
+                <h3>TravEngine – Travel Booking Platform</h3>
+                <span class="project-date">May 2026 – Present</span>
+              </div>
+
+              <ul class="project-points">
+                <li>
+                  Developed key modules of a multi-service travel booking platform enabling users to book hotels,
+                  transportation, activities, tours, and packages from one unified interface.
+                </li>
+                <li>
+                  Engineered search, filtering, and multi-step booking workflows using <strong>Angular, RxJS, and Reactive Forms</strong>
+                  with custom validators and real-time error handling.
+                </li>
+                <li>
+                  Implemented <strong>lazy loading, route guards, and HTTP interceptors</strong> alongside reusable,
+                  responsive UI components in TypeScript and SCSS.
+                </li>
+              </ul>
+
+              <div class="tag-row">
+                <span class="tech-tag">Angular</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">RxJS</span>
+                <span class="tech-tag">Reactive Forms</span>
+                <span class="tech-tag">SCSS</span>
+                <span class="tech-tag">REST APIs</span>
+              </div>
+
+              <div class="project-links">
+                <a
+                  href="https://alb-ui.travengine.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary btn-sm"
+                >
+                  <span>Visit Live Platform</span>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: Mohta Ayurved -->
+          <article class="project-card card reveal">
+            <div class="project-preview project-preview-ecom">
+              <div class="preview-topbar" aria-hidden="true">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="preview-url">mohtaayurved.com</span>
+              </div>
+              <div class="preview-body">
+                <span class="project-pill">Production E-Commerce &amp; Admin</span>
+                <div class="preview-modules" aria-hidden="true">
+                  <span>Catalog</span>
+                  <span>Cart &amp; Checkout</span>
+                  <span>Payments</span>
+                  <span>Role Admin</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-title-row">
+                <h3>Mohta Ayurved – E-Commerce Platform</h3>
+                <span class="project-date">Oct 2024 – Mar 2025</span>
+              </div>
+
+              <ul class="project-points">
+                <li>
+                  Engineered an Ayurvedic medicine e-commerce platform with <strong>Angular</strong>: catalog search,
+                  shopping cart, checkout, order management, and secure payment gateway integration with role-based admin controls.
+                </li>
+                <li>
+                  Built a dedicated administrative dashboard empowering non-technical staff to manage product inventory
+                  and customer orders independently.
+                </li>
+              </ul>
+
+              <div class="tag-row">
+                <span class="tech-tag">Angular</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">REST APIs</span>
+                <span class="tech-tag">Payment Gateway</span>
+                <span class="tech-tag">Role-Based Admin</span>
+              </div>
+
+              <div class="project-links">
+                <a
+                  href="https://mohtaayurved.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary btn-sm"
+                >
+                  <span>Visit Live Store</span>
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Additional Enterprise Contribution Callout -->
+        <div class="enterprise-callout card reveal">
+          <div class="callout-info">
+            <span class="callout-badge">Enterprise Impact</span>
+            <h3>Travzilla Pro – Global Travel ERP</h3>
+            <p>
+              Core Angular frontend contributor at GenX eSolutions for an enterprise Travel ERP platform serving
+              <strong>55+ global clients across 20+ countries</strong> with NgRx state management, RxJS workflows, and ASP.NET Core integrations.
+            </p>
+          </div>
+          <a href="#experience" class="btn btn-outline btn-sm">View Details in Experience</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EDUCATION SECTION -->
+    <section id="education" class="education section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Academic Background</span>
+          <h2 class="section-title">Education</h2>
+        </div>
+
+        <div class="education-card card reveal">
+          <div class="edu-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+          </div>
+
+          <div class="edu-details">
+            <div class="edu-top">
+              <div>
+                <h3>Bachelor of Technology (B.Tech) in Computer Science and Engineering</h3>
+                <p class="edu-university">Dr. A.P.J. Abdul Kalam Technical University (AKTU), Uttar Pradesh, India</p>
+              </div>
+              <span class="edu-date">Jul 2019 – Jul 2023</span>
+            </div>
+
+            <div class="edu-metrics">
+              <span class="cgpa-badge">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                CGPA: 8.37 / 10.0
+              </span>
+              <span class="edu-tag">Computer Science &amp; Engineering</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT & DOWNLOAD RESUME SECTION -->
+    <section id="contact" class="contact section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">Contact Me</h2>
+          <p class="section-subtitle">
+            Looking for an Angular Developer to build reliable, scalable frontend architectures? Let's connect.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Direct Contact Cards -->
+          <div class="contact-info-panel reveal">
+            <div class="contact-card card">
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </span>
+                <div class="contact-text">
+                  <span class="contact-label">Email</span>
+                  <a href="mailto:ritikagupta0827@gmail.com" class="contact-link">ritikagupta0827@gmail.com</a>
+                </div>
+                <button
+                  type="button"
+                  class="copy-btn"
+                  data-copy="ritikagupta0827@gmail.com"
+                  aria-label="Copy email address"
+                  title="Copy email address"
+                >
+                  Copy
+                </button>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </span>
+                <div class="contact-text">
+                  <span class="contact-label">Phone</span>
+                  <a href="tel:+916387515627" class="contact-link">+91-6387515627</a>
+                </div>
+                <button
+                  type="button"
+                  class="copy-btn"
+                  data-copy="+916387515627"
+                  aria-label="Copy phone number"
+                  title="Copy phone number"
+                >
+                  Copy
+                </button>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div class="contact-text">
+                  <span class="contact-label">Location</span>
+                  <span class="contact-value">Noida, Uttar Pradesh, India</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social & Resume Box -->
+            <div class="contact-social-box card">
+              <h3>Connect &amp; Profiles</h3>
+              <div class="contact-social-links">
+                <a
+                  href="https://www.linkedin.com/in/ritika-gupta7777"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-row-link"
+                >
+                  <span>LinkedIn</span>
+                  <small>linkedin.com/in/ritika-gupta7777</small>
+                </a>
+
+                <a
+                  href="https://github.com/Ritika277"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-row-link"
+                >
+                  <span>GitHub</span>
+                  <small>github.com/Ritika277</small>
+                </a>
+
+                <a
+                  href="https://leetcode.com/u/iamgupta/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-row-link"
+                >
+                  <span>LeetCode</span>
+                  <small>leetcode.com/u/iamgupta</small>
+                </a>
+              </div>
+
+              <a
+                href="assets/Ritika-Gupta-Resume.pdf"
+                download="Ritika-Gupta-Resume.pdf"
+                class="btn btn-primary btn-full"
+              >
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download Resume (PDF)
+              </a>
+            </div>
+          </div>
+
+          <!-- Recruiter Inquiry Form -->
+          <div class="contact-form-panel card reveal">
+            <h3>Send a Message</h3>
+            <p class="form-intro">
+              Reach out for Angular Developer roles, interviews, or technical discussions.
+            </p>
+
+            <form id="contactForm" novalidate>
+              <div class="form-group">
+                <label for="senderName">Your Name</label>
+                <input
+                  type="text"
+                  id="senderName"
+                  name="name"
+                  placeholder="e.g. Recruiter / Hiring Manager"
+                  autocomplete="name"
+                  required
+                />
+                <span class="field-error" id="nameError" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="senderEmail">Email Address</label>
+                <input
+                  type="email"
+                  id="senderEmail"
+                  name="email"
+                  placeholder="you@company.com"
+                  autocomplete="email"
+                  required
+                />
+                <span class="field-error" id="emailError" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="messageSubject">Subject / Opportunity</label>
+                <input
+                  type="text"
+                  id="messageSubject"
+                  name="subject"
+                  placeholder="Angular Developer Opportunity"
+                  required
+                />
+                <span class="field-error" id="subjectError" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="messageBody">Message</label>
+                <textarea
+                  id="messageBody"
+                  name="message"
+                  rows="4"
+                  placeholder="Share role details, interview availability, or project info..."
+                  required
+                ></textarea>
+                <span class="field-error" id="messageError" aria-live="polite"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                <span>Open in Email Client</span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+
+              <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>Ritika Gupta</strong>
+        <span>Angular Developer · 2+ Years Experience</span>
+      </div>
+
+      <nav class="footer-links" aria-label="Footer Navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <p class="footer-copy">&copy; <span id="currentYear">2026</span> Ritika Gupta. Built with HTML5, CSS3 &amp; Vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button
+    type="button"
+    class="back-to-top"
+    id="backToTopBtn"
+    aria-label="Back to top"
+    title="Back to top"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+  </button>
+
+  <!-- Accessible Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
