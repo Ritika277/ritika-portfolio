@@ -42,32 +42,82 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. Sticky Navbar, Scroll Progress Bar & Back-to-Top Button
+     2. Sticky Navbar, GPU Scroll Progress Bar, Smooth Anchors & Back-to-Top
      ------------------------------------------------------------------------ */
   const navbar = document.getElementById('navbar');
   const scrollProgress = document.getElementById('scrollProgress');
   const backToTopBtn = document.getElementById('backToTopBtn');
 
-  function handleScrollUI() {
+  let maxScrollableY = 0;
+  let lastScrolledNav = null;
+  let lastVisibleTopBtn = null;
+  let scrollRafPending = false;
+  let isScrolling = false;
+  let scrollIdleTimer = null;
+
+  function refreshScrollMetrics() {
+    maxScrollableY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  function applyScrollUI() {
+    scrollRafPending = false;
     const scrollY = window.scrollY || window.pageYOffset;
 
-    if (navbar) {
-      navbar.classList.toggle('scrolled', scrollY > 24);
+    const isScrolled = scrollY > 24;
+    if (navbar && isScrolled !== lastScrolledNav) {
+      lastScrolledNav = isScrolled;
+      navbar.classList.toggle('scrolled', isScrolled);
     }
 
-    if (backToTopBtn) {
-      backToTopBtn.classList.toggle('is-visible', scrollY > 420);
+    const showBackTop = scrollY > 420;
+    if (backToTopBtn && showBackTop !== lastVisibleTopBtn) {
+      lastVisibleTopBtn = showBackTop;
+      backToTopBtn.classList.toggle('is-visible', showBackTop);
     }
 
     if (scrollProgress) {
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) : 0;
-      scrollProgress.style.width = `${progress}%`;
+      const progress = maxScrollableY > 0 ? Math.min(1, Math.max(0, scrollY / maxScrollableY)) : 0;
+      scrollProgress.style.transform = `scaleX(${progress.toFixed(4)})`;
     }
   }
 
-  window.addEventListener('scroll', handleScrollUI, { passive: true });
-  handleScrollUI();
+  function onScroll() {
+    isScrolling = true;
+    window.clearTimeout(scrollIdleTimer);
+    scrollIdleTimer = window.setTimeout(() => {
+      isScrolling = false;
+    }, 130);
+
+    if (!scrollRafPending) {
+      scrollRafPending = true;
+      window.requestAnimationFrame(applyScrollUI);
+    }
+  }
+
+  refreshScrollMetrics();
+  applyScrollUI();
+  window.addEventListener('load', refreshScrollMetrics, { passive: true });
+  window.addEventListener('resize', refreshScrollMetrics, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Smooth scrolling for explicit anchor clicks only (keeps wheel/touch native & instant)
+  const anchorLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
+  anchorLinks.forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+      const targetId = anchor.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      const targetEl = document.querySelector(targetId);
+      if (!targetEl) return;
+
+      event.preventDefault();
+      const navOffset = navbar ? navbar.offsetHeight + 16 : 92;
+      const top = Math.max(0, targetEl.getBoundingClientRect().top + window.scrollY - navOffset);
+      window.scrollTo({
+        top,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
+    });
+  });
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
@@ -230,6 +280,8 @@
             }
           }
         });
+        refreshScrollMetrics();
+        applyScrollUI();
       });
     });
   }
@@ -378,17 +430,9 @@
   }
 
   /* ------------------------------------------------------------------------
-     11. Staggered Skill Badges, Animated Stat Counters & Pointer Micro-FX
+     11. Animated Stat Counters & Delegated Pointer Micro-FX
      ------------------------------------------------------------------------ */
   if (!prefersReducedMotion) {
-    // Cascade skill badge delays within each card
-    skillCards.forEach((card) => {
-      const badges = card.querySelectorAll('.skill-badge');
-      badges.forEach((badge, index) => {
-        badge.style.transitionDelay = `${Math.min(index * 45, 420)}ms`;
-      });
-    });
-
     // Smoothly animate stat counters when .about-stats enters view
     const statNumbers = Array.from(document.querySelectorAll('.about-stats .stat-number'));
     const statsContainer = document.querySelector('.about-stats');
@@ -444,30 +488,65 @@
       statsObserver.observe(statsContainer);
     }
 
-    // Subtle pointer spotlight glow on glass cards & 3D tilt on hero portrait
+    // Delegated pointer spotlight glow on glass cards & throttled 3D tilt on hero portrait
     const isFinePointer = window.matchMedia('(pointer: fine)').matches;
     if (isFinePointer) {
-      const glassCards = Array.from(document.querySelectorAll('.card'));
-      glassCards.forEach((card) => {
-        card.addEventListener('pointermove', (event) => {
-          const rect = card.getBoundingClientRect();
-          const x = ((event.clientX - rect.left) / rect.width) * 100;
-          const y = ((event.clientY - rect.top) / rect.height) * 100;
-          card.style.setProperty('--mouse-x', `${x.toFixed(1)}%`);
-          card.style.setProperty('--mouse-y', `${y.toFixed(1)}%`);
-        });
-      });
+      const mainEl = document.getElementById('main-content');
+      let cardMoveRaf = false;
+      let pendingCardEvent = null;
+
+      if (mainEl) {
+        mainEl.addEventListener(
+          'pointermove',
+          (event) => {
+            if (isScrolling) return;
+            pendingCardEvent = event;
+            if (cardMoveRaf) return;
+
+            cardMoveRaf = true;
+            window.requestAnimationFrame(() => {
+              cardMoveRaf = false;
+              const ev = pendingCardEvent;
+              if (!ev) return;
+              const card = ev.target && ev.target.closest ? ev.target.closest('.card') : null;
+              if (!card) return;
+              const rect = card.getBoundingClientRect();
+              const x = ((ev.clientX - rect.left) / rect.width) * 100;
+              const y = ((ev.clientY - rect.top) / rect.height) * 100;
+              card.style.setProperty('--mouse-x', `${x.toFixed(1)}%`);
+              card.style.setProperty('--mouse-y', `${y.toFixed(1)}%`);
+            });
+          },
+          { passive: true }
+        );
+      }
 
       const portraitWrapper = document.querySelector('.portrait-wrapper');
       if (portraitWrapper) {
-        portraitWrapper.addEventListener('pointermove', (event) => {
-          const rect = portraitWrapper.getBoundingClientRect();
-          const relX = (event.clientX - rect.left) / rect.width - 0.5;
-          const relY = (event.clientY - rect.top) / rect.height - 0.5;
-          const rotateY = (relX * 7).toFixed(2);
-          const rotateX = (-relY * 7).toFixed(2);
-          portraitWrapper.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
+        let tiltRaf = false;
+        let lastTiltEvent = null;
+
+        portraitWrapper.addEventListener(
+          'pointermove',
+          (event) => {
+            if (isScrolling) return;
+            lastTiltEvent = event;
+            if (tiltRaf) return;
+            tiltRaf = true;
+            window.requestAnimationFrame(() => {
+              tiltRaf = false;
+              const ev = lastTiltEvent;
+              if (!ev) return;
+              const rect = portraitWrapper.getBoundingClientRect();
+              const relX = (ev.clientX - rect.left) / rect.width - 0.5;
+              const relY = (ev.clientY - rect.top) / rect.height - 0.5;
+              const rotateY = (relX * 7).toFixed(2);
+              const rotateX = (-relY * 7).toFixed(2);
+              portraitWrapper.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+          },
+          { passive: true }
+        );
 
         portraitWrapper.addEventListener('pointerleave', () => {
           portraitWrapper.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
@@ -495,23 +574,40 @@
       dotY: window.innerHeight * 0.35,
       lastTrailX: -999,
       lastTrailY: -999,
+      spotDirty: true,
+      ringDirty: true,
       active: false,
     };
 
     let touchFadeTimer = null;
 
     if (bgCanvas && bgCanvas.getContext) {
-      const ctx = bgCanvas.getContext('2d');
+      const ctx = bgCanvas.getContext('2d', { alpha: true });
       let width = window.innerWidth;
       let height = window.innerHeight;
-      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       let particles = [];
       const trailSparks = [];
       const tapRipples = [];
       let rafId = null;
+      let scrollFrameSkip = false;
+
+      // Pre-render one reusable spark glow sprite to avoid per-frame gradient allocations
+      const sparkSprite = document.createElement('canvas');
+      sparkSprite.width = 32;
+      sparkSprite.height = 32;
+      const sparkCtx = sparkSprite.getContext('2d');
+      if (sparkCtx) {
+        const grad = sparkCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        grad.addColorStop(0, 'rgba(186, 230, 253, 0.92)');
+        grad.addColorStop(0.45, 'rgba(56, 189, 248, 0.45)');
+        grad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        sparkCtx.fillStyle = grad;
+        sparkCtx.fillRect(0, 0, 32, 32);
+      }
 
       function getTargetParticleCount() {
-        return width < 768 ? 24 : 50;
+        return width < 768 ? 16 : 34;
       }
 
       function createParticle() {
@@ -525,16 +621,16 @@
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * 0.34,
           vy: (Math.random() - 0.5) * 0.34,
-          radius: 1.1 + Math.random() * 1.7,
-          alpha: 0.18 + Math.random() * 0.28,
-          colorPrefix: palette[Math.floor(Math.random() * palette.length)],
+          radius: 1.1 + Math.random() * 1.6,
+          alpha: 0.2 + Math.random() * 0.26,
+          color: palette[Math.floor(Math.random() * palette.length)],
         };
       }
 
       function syncCanvasSize() {
         width = window.innerWidth;
         height = window.innerHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         bgCanvas.width = Math.floor(width * dpr);
         bgCanvas.height = Math.floor(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -542,10 +638,11 @@
         const desired = getTargetParticleCount();
         while (particles.length < desired) particles.push(createParticle());
         if (particles.length > desired) particles.length = desired;
+        refreshScrollMetrics();
       }
 
       function spawnTrailSparks(x, y, count = 2) {
-        if (trailSparks.length >= 36) {
+        if (trailSparks.length >= 28) {
           trailSparks.splice(0, count);
         }
         for (let i = 0; i < count; i += 1) {
@@ -554,67 +651,97 @@
             y: y + (Math.random() - 0.5) * 8,
             vx: (Math.random() - 0.5) * 0.75,
             vy: (Math.random() - 0.5) * 0.75 - 0.15,
-            radius: 1.8 + Math.random() * 2.4,
+            size: 12 + Math.random() * 12,
             alpha: 0.65,
           });
         }
       }
 
       function spawnRipple(x, y) {
-        if (tapRipples.length >= 8) tapRipples.shift();
+        if (tapRipples.length >= 6) tapRipples.shift();
         tapRipples.push({
           x,
           y,
           radius: 6,
-          maxRadius: width < 768 ? 58 : 72,
-          alpha: 0.48,
+          maxRadius: width < 768 ? 56 : 70,
+          alpha: 0.45,
         });
       }
 
       function updatePointerVisuals() {
-        // Smooth spotlight follow
-        pointer.spotX += (pointer.targetX - pointer.spotX) * 0.12;
-        pointer.spotY += (pointer.targetY - pointer.spotY) * 0.12;
+        const dxSpot = pointer.targetX - pointer.spotX;
+        const dySpot = pointer.targetY - pointer.spotY;
+        if (Math.abs(dxSpot) > 0.2 || Math.abs(dySpot) > 0.2 || pointer.spotDirty) {
+          pointer.spotX += dxSpot * 0.14;
+          pointer.spotY += dySpot * 0.14;
+          pointer.spotDirty = Math.abs(dxSpot) > 0.5 || Math.abs(dySpot) > 0.5;
 
-        if (cursorSpotlight) {
-          cursorSpotlight.style.transform = `translate3d(${(pointer.spotX - 230).toFixed(1)}px, ${(pointer.spotY - 230).toFixed(1)}px, 0)`;
+          if (cursorSpotlight) {
+            cursorSpotlight.style.transform = `translate3d(${(pointer.spotX - 230).toFixed(1)}px, ${(pointer.spotY - 230).toFixed(1)}px, 0)`;
+          }
         }
 
-        // Smooth desktop cursor ring + dot
         if (supportsHoverCursor && cursorRing && cursorDot) {
-          pointer.dotX += (pointer.targetX - pointer.dotX) * 0.45;
-          pointer.dotY += (pointer.targetY - pointer.dotY) * 0.45;
-          pointer.ringX += (pointer.targetX - pointer.ringX) * 0.16;
-          pointer.ringY += (pointer.targetY - pointer.ringY) * 0.16;
+          const dxDot = pointer.targetX - pointer.dotX;
+          const dyDot = pointer.targetY - pointer.dotY;
+          const dxRing = pointer.targetX - pointer.ringX;
+          const dyRing = pointer.targetY - pointer.ringY;
 
-          cursorDot.style.transform = `translate3d(${pointer.dotX.toFixed(1)}px, ${pointer.dotY.toFixed(1)}px, 0)`;
-          cursorRing.style.transform = `translate3d(${pointer.ringX.toFixed(1)}px, ${pointer.ringY.toFixed(1)}px, 0)`;
+          if (
+            Math.abs(dxDot) > 0.15 ||
+            Math.abs(dyDot) > 0.15 ||
+            Math.abs(dxRing) > 0.15 ||
+            Math.abs(dyRing) > 0.15 ||
+            pointer.ringDirty
+          ) {
+            pointer.dotX += dxDot * 0.48;
+            pointer.dotY += dyDot * 0.48;
+            pointer.ringX += dxRing * 0.18;
+            pointer.ringY += dyRing * 0.18;
+            pointer.ringDirty = Math.abs(dxRing) > 0.4 || Math.abs(dyRing) > 0.4;
+
+            cursorDot.style.transform = `translate3d(${pointer.dotX.toFixed(1)}px, ${pointer.dotY.toFixed(1)}px, 0)`;
+            cursorRing.style.transform = `translate3d(${pointer.ringX.toFixed(1)}px, ${pointer.ringY.toFixed(1)}px, 0)`;
+          }
         }
       }
 
       function renderFrame() {
+        updatePointerVisuals();
+
+        // Throttle canvas redraw to 30fps during active scrolling so scrolling stays 100% fluid
+        if (isScrolling) {
+          scrollFrameSkip = !scrollFrameSkip;
+          if (scrollFrameSkip) {
+            rafId = window.requestAnimationFrame(renderFrame);
+            return;
+          }
+        }
+
         ctx.clearRect(0, 0, width, height);
 
-        const maxLinkDist = width < 768 ? 95 : 128;
-        const pointerRadius = width < 768 ? 120 : 155;
+        const maxLinkDist = width < 768 ? 96 : 132;
+        const maxLinkDistSq = maxLinkDist * maxLinkDist;
+        const pointerRadius = width < 768 ? 115 : 150;
+        const pointerRadiusSq = pointerRadius * pointerRadius;
+        const len = particles.length;
 
-        // Update & draw ambient constellation particles
-        for (let i = 0; i < particles.length; i += 1) {
+        // Update particles
+        for (let i = 0; i < len; i += 1) {
           const p = particles[i];
 
           if (pointer.active) {
             const dx = p.x - pointer.targetX;
             const dy = p.y - pointer.targetY;
             const distSq = dx * dx + dy * dy;
-            if (distSq > 4 && distSq < pointerRadius * pointerRadius) {
+            if (distSq > 4 && distSq < pointerRadiusSq) {
               const dist = Math.sqrt(distSq);
-              const force = ((pointerRadius - dist) / pointerRadius) * 0.045;
+              const force = ((pointerRadius - dist) / pointerRadius) * 0.04;
               p.vx += (dx / dist) * force;
               p.vy += (dy / dist) * force;
             }
           }
 
-          // Gentle velocity damping back toward ambient drift
           p.vx *= 0.992;
           p.vy *= 0.992;
           if (Math.abs(p.vx) < 0.08) p.vx += (Math.random() - 0.5) * 0.03;
@@ -624,88 +751,88 @@
           p.y += p.vy;
 
           if (p.x < -10) p.x = width + 10;
-          if (p.x > width + 10) p.x = -10;
+          else if (p.x > width + 10) p.x = -10;
           if (p.y < -10) p.y = height + 10;
-          if (p.y > height + 10) p.y = -10;
+          else if (p.y > height + 10) p.y = -10;
 
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `${p.colorPrefix}${p.alpha})`;
+          ctx.fillStyle = `${p.color}${p.alpha})`;
           ctx.fill();
+        }
 
-          // Connect nearby particles subtly
-          for (let j = i + 1; j < particles.length; j += 1) {
-            const q = particles[j];
-            const dx = p.x - q.x;
-            const dy = p.y - q.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < maxLinkDist) {
-              const lineAlpha = (1 - dist / maxLinkDist) * 0.11;
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              ctx.strokeStyle = `rgba(56, 189, 248, ${lineAlpha.toFixed(3)})`;
-              ctx.lineWidth = 0.8;
-              ctx.stroke();
+        // Batch all particle-to-particle connection lines into a single stroke call
+        if (!isScrolling) {
+          ctx.beginPath();
+          for (let i = 0; i < len; i += 1) {
+            const p = particles[i];
+            for (let j = i + 1; j < len; j += 1) {
+              const q = particles[j];
+              const dx = p.x - q.x;
+              const dy = p.y - q.y;
+              if (dx * dx + dy * dy < maxLinkDistSq) {
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+              }
             }
           }
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.085)';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
 
-          // Connect particles near active pointer
           if (pointer.active) {
-            const pDist = Math.hypot(p.x - pointer.targetX, p.y - pointer.targetY);
-            if (pDist < pointerRadius) {
-              const lineAlpha = (1 - pDist / pointerRadius) * 0.22;
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(pointer.targetX, pointer.targetY);
-              ctx.strokeStyle = `rgba(96, 165, 250, ${lineAlpha.toFixed(3)})`;
-              ctx.lineWidth = 0.9;
-              ctx.stroke();
+            ctx.beginPath();
+            for (let i = 0; i < len; i += 1) {
+              const p = particles[i];
+              const dx = p.x - pointer.targetX;
+              const dy = p.y - pointer.targetY;
+              if (dx * dx + dy * dy < pointerRadiusSq) {
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(pointer.targetX, pointer.targetY);
+              }
             }
+            ctx.strokeStyle = 'rgba(96, 165, 250, 0.16)';
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
           }
         }
 
-        // Draw glowing cursor / touch trail sparks
-        for (let i = trailSparks.length - 1; i >= 0; i -= 1) {
-          const s = trailSparks[i];
-          s.x += s.vx;
-          s.y += s.vy;
-          s.alpha -= 0.025;
-          s.radius *= 0.985;
+        // Draw glowing cursor / touch trail sparks via pre-rendered sprite
+        if (trailSparks.length > 0) {
+          for (let i = trailSparks.length - 1; i >= 0; i -= 1) {
+            const s = trailSparks[i];
+            s.x += s.vx;
+            s.y += s.vy;
+            s.alpha -= 0.026;
+            s.size *= 0.985;
 
-          if (s.alpha <= 0.02) {
-            trailSparks.splice(i, 1);
-            continue;
+            if (s.alpha <= 0.02) {
+              trailSparks.splice(i, 1);
+              continue;
+            }
+
+            ctx.globalAlpha = s.alpha;
+            ctx.drawImage(sparkSprite, s.x - s.size * 0.5, s.y - s.size * 0.5, s.size, s.size);
           }
-
-          const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius * 3.2);
-          grad.addColorStop(0, `rgba(186, 230, 253, ${(s.alpha * 0.9).toFixed(3)})`);
-          grad.addColorStop(0.45, `rgba(56, 189, 248, ${(s.alpha * 0.45).toFixed(3)})`);
-          grad.addColorStop(1, 'rgba(56, 189, 248, 0)');
-
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.radius * 3.2, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.fill();
+          ctx.globalAlpha = 1;
         }
 
         // Draw click / touch ripples
         for (let i = tapRipples.length - 1; i >= 0; i -= 1) {
           const r = tapRipples[i];
           r.radius += 2.2;
-          r.alpha -= 0.02;
+          r.alpha -= 0.022;
           if (r.alpha <= 0.02 || r.radius >= r.maxRadius) {
             tapRipples.splice(i, 1);
             continue;
           }
           ctx.beginPath();
           ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(56, 189, 248, ${r.alpha.toFixed(3)})`;
+          ctx.strokeStyle = `rgba(56, 189, 248, ${r.alpha.toFixed(2)})`;
           ctx.lineWidth = 1.4;
           ctx.stroke();
         }
 
-        updatePointerVisuals();
         rafId = window.requestAnimationFrame(renderFrame);
       }
 
@@ -753,27 +880,31 @@
             if (event.pointerType === 'touch') return;
             pointer.targetX = event.clientX;
             pointer.targetY = event.clientY;
+            pointer.spotDirty = true;
+            pointer.ringDirty = true;
             pointer.active = true;
 
             if (cursorSpotlight) cursorSpotlight.classList.add('is-active');
             if (cursorRing) cursorRing.classList.add('is-visible');
             if (cursorDot) cursorDot.classList.add('is-visible');
 
-            const moveDist = Math.hypot(
-              event.clientX - pointer.lastTrailX,
-              event.clientY - pointer.lastTrailY
-            );
-            if (moveDist >= 8) {
-              spawnTrailSparks(event.clientX, event.clientY, 1);
-              pointer.lastTrailX = event.clientX;
-              pointer.lastTrailY = event.clientY;
+            if (!isScrolling) {
+              const moveDist = Math.hypot(
+                event.clientX - pointer.lastTrailX,
+                event.clientY - pointer.lastTrailY
+              );
+              if (moveDist >= 10) {
+                spawnTrailSparks(event.clientX, event.clientY, 1);
+                pointer.lastTrailX = event.clientX;
+                pointer.lastTrailY = event.clientY;
+              }
             }
           },
           { passive: true }
         );
 
         document.addEventListener('mouseover', (event) => {
-          if (!cursorRing) return;
+          if (!cursorRing || isScrolling) return;
           const interactive = event.target.closest(interactiveSelector);
           cursorRing.classList.toggle('is-hovering', Boolean(interactive));
         });
@@ -784,7 +915,7 @@
             if (event.pointerType === 'touch') return;
             if (cursorRing) cursorRing.classList.add('is-clicking');
             spawnRipple(event.clientX, event.clientY);
-            spawnTrailSparks(event.clientX, event.clientY, 5);
+            spawnTrailSparks(event.clientX, event.clientY, 4);
           },
           { passive: true }
         );
@@ -813,12 +944,13 @@
           if (!touch) return;
           pointer.targetX = touch.clientX;
           pointer.targetY = touch.clientY;
+          pointer.spotDirty = true;
           pointer.active = true;
           window.clearTimeout(touchFadeTimer);
 
           if (cursorSpotlight) cursorSpotlight.classList.add('is-active');
           spawnRipple(touch.clientX, touch.clientY);
-          spawnTrailSparks(touch.clientX, touch.clientY, 4);
+          spawnTrailSparks(touch.clientX, touch.clientY, 3);
         },
         { passive: true }
       );
@@ -830,14 +962,15 @@
           if (!touch) return;
           pointer.targetX = touch.clientX;
           pointer.targetY = touch.clientY;
+          pointer.spotDirty = true;
           pointer.active = true;
 
           const moveDist = Math.hypot(
             touch.clientX - pointer.lastTrailX,
             touch.clientY - pointer.lastTrailY
           );
-          if (moveDist >= 10) {
-            spawnTrailSparks(touch.clientX, touch.clientY, 2);
+          if (moveDist >= 14) {
+            spawnTrailSparks(touch.clientX, touch.clientY, 1);
             pointer.lastTrailX = touch.clientX;
             pointer.lastTrailY = touch.clientY;
           }
@@ -851,7 +984,7 @@
           touchFadeTimer = window.setTimeout(() => {
             pointer.active = false;
             if (cursorSpotlight) cursorSpotlight.classList.remove('is-active');
-          }, 900);
+          }, 800);
         },
         { passive: true }
       );
